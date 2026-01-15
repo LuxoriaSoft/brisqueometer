@@ -79,11 +79,24 @@ public class HomeController : Controller
                 score = brisque.ComputeScore(filePath);
             }
 
+            try
+            {
+                if (System.IO.File.Exists(filePath))
+                {
+                    System.IO.File.Delete(filePath);
+                    _logger.LogInformation($"Deleted uploaded file: {fileName}");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error deleting file: {fileName}");
+            }
+
             // Create result view model
             var result = new BrisqueResultViewModel
             {
                 Score = score,
-                ImagePath = $"/uploads/{fileName}",
+                ImagePath = string.Empty,
                 FileName = model.ImageFile.FileName,
                 QualityDescription = GetQualityDescription(score)
             };
