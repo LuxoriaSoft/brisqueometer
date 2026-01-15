@@ -1,0 +1,55 @@
+@model BrisqueResultViewModel
+@{
+    ViewData["Title"] = "Quality Assessment Result";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Quality Assessment Result</h1>
+</div>
+
+<div class="row justify-content-center mt-4">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-body">
+                <h5 class="card-title">@Model.FileName</h5>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="@Model.ImagePath" alt="Uploaded Image" class="img-fluid rounded shadow-sm mb-3">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="result-info">
+                            <h3>BRISQUE Score</h3>
+                            <div class="display-3 text-primary mb-3">@Model.Score.ToString("F2")</div>
+                            
+                            <div class="alert alert-info" role="alert">
+                                <h5>Quality Assessment: <strong>@Model.QualityDescription</strong></h5>
+                            </div>
+
+                            <div class="quality-scale mt-4">
+                                <h6>Quality Scale:</h6>
+                                <ul class="list-unstyled">
+                                    <li><span class="badge bg-success">0-20</span> Excellent</li>
+                                    <li><span class="badge bg-primary">20-40</span> Good</li>
+                                    <li><span class="badge bg-warning">40-60</span> Fair</li>
+                                    <li><span class="badge bg-orange text-dark">60-80</span> Poor</li>
+                                    <li><span class="badge bg-danger">80-100</span> Very Poor</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <a asp-action="Index" class="btn btn-primary">Analyze Another Image</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .badge.bg-orange {
+        background-color: #fd7e14 !important;
+    }
+</style>
